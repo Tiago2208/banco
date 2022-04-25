@@ -2,7 +2,7 @@ public class TestaConta {
     public static void main(String[] args) {
         Cliente cliente = new Cliente();
         cliente.nomeCompleto = "Tiago Andrade";
-        
+
         Data hoje = new Data();
         hoje.dia = 25;
         hoje.mes = 4;
@@ -15,7 +15,7 @@ public class TestaConta {
         contaCorrente.cliente = cliente;
         contaCorrente.dataDeAbertura = hoje;
         contaCorrente.limite = 300;
-        contaCorrente.saldo = 100;
+        contaCorrente.depositar(100);
         contaCorrente.tipo = "Conta Corrente";
 
         double rendimentoAbril = contaCorrente.calcularRendimento(0.1);
@@ -30,7 +30,7 @@ public class TestaConta {
         contaPoupanca.cliente = cliente;
         contaPoupanca.dataDeAbertura = hoje;
         contaPoupanca.limite = 0;
-        contaPoupanca.saldo = 100;
+        contaPoupanca.depositar(100);
         contaPoupanca.tipo = "Conta Corrente";
 
         if (contaCorrente == contaPoupanca) {

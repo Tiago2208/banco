@@ -1,5 +1,5 @@
 public class Conta {
-    double saldo;
+    private double saldo;
     String tipo;
     String numero;
     String agencia;
@@ -31,23 +31,24 @@ public class Conta {
     }
 
     void pix(double valorPix, Conta contaDestino) {
-      if(this.sacar(valorPix)) {
-          contaDestino.depositar(valorPix);
-          System.out.println("Seu pix de " + valorPix + " foi feito com sucesso!");
+        if (this.sacar(valorPix)) {
+            contaDestino.depositar(valorPix);
+            System.out.println("Seu pix de " + valorPix + " foi feito com sucesso!");
         } else {
             System.out.println("Saldo insuficiente!");
         }
 
     }
+
     double calcularRendimento(double taxa) {
         return this.saldo * taxa;
 
     }
 
-    String recuperarDadosParaImpressao(){
+    String recuperarDadosParaImpressao() {
         return "Nome do Titular: " + this.cliente.nomeCompleto + "\n" +
-                "AG: " + this.agencia + "\n" + 
-                "CC: " + this.numero + "\n" + 
+                "AG: " + this.agencia + "\n" +
+                "CC: " + this.numero + "\n" +
                 "Data de abertura: " + this.dataDeAbertura.toString() + "\n" +
                 "Saldo: R$ " + String.format("%.2f", this.saldo);
     }
