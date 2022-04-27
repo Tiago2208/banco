@@ -18,6 +18,7 @@ public class Conta {
         this.numero = numero;
         this.tipo = tipo;
         this.saldo = 0;
+        this.limite = 0;
         this.ativa = true;
         this.dataDeAbertura = LocalDateTime.now();
         Conta.contador++;
@@ -93,6 +94,9 @@ public class Conta {
 
     public boolean isAtiva() {
         return ativa;
+    }
+    public String getTipo() {
+        return tipo;
     }
 
     @Override
