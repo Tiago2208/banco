@@ -1,16 +1,23 @@
+package br.com.digix.modelo;
 import java.time.LocalDate;
 
 public class Cliente {
+    private static int id;
     private String nomeCompleto;
     private String cpf;
     private LocalDate dataDeNascimento;
     private Endereco endereco;
 
-    Cliente(String nomeCompleto, String cpf, LocalDate dataDeNascimento, Endereco endereco) {
+   public Cliente(String nomeCompleto, String cpf, LocalDate dataDeNascimento, Endereco endereco) {
+        Cliente.id++;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
         this.endereco = endereco;
+    }
+
+    public static int getId() {
+        return id;
     }
 
     public String getCpf() {

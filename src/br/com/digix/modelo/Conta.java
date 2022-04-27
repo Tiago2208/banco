@@ -1,7 +1,9 @@
+package br.com.digix.modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Conta {
+    private static int id;
     private double saldo;
     private String tipo;
     private String numero;
@@ -12,7 +14,8 @@ public class Conta {
     private Cliente cliente;
     private static int contador;
 
-    Conta(Cliente cliente, String agencia, String numero, String tipo) {
+   public Conta(Cliente cliente, String agencia, String numero, String tipo) {
+        Conta.id++;
         this.cliente = cliente;
         this.agencia = agencia;
         this.numero = numero;
@@ -24,7 +27,16 @@ public class Conta {
         Conta.contador++;
     }
 
-    boolean sacar(double quantidade) {
+   public Conta(Cliente cliente, String agencia, String numero, String tipo, double limite) {
+        this(cliente, agencia, numero, tipo);
+        this.limite = limite;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+   public boolean sacar(double quantidade) {
         double novoSaldo = this.saldo - quantidade;
         if (novoSaldo >= 0) {
             this.saldo = novoSaldo;
@@ -36,7 +48,7 @@ public class Conta {
 
     }
 
-    void depositar(double quantidade) {
+   public void depositar(double quantidade) {
         if (quantidade <= 0) {
             System.out.println("Valor inválido!");
 
@@ -46,7 +58,7 @@ public class Conta {
         }
     }
 
-    void pix(double valorPix, Conta contaDestino) {
+   public void pix(double valorPix, Conta contaDestino) {
         if (this.sacar(valorPix)) {
             contaDestino.depositar(valorPix);
             System.out.println("Seu pix de " + valorPix + " foi feito com sucesso!");
@@ -56,7 +68,7 @@ public class Conta {
 
     }
 
-    double calcularRendimento(double taxa) {
+   public double calcularRendimento(double taxa) {
         return this.saldo * taxa;
 
     }
@@ -64,6 +76,7 @@ public class Conta {
     public void aumentarLimite(double valor) {
         this.limite += valor;
     }
+
     public static int getTotalDeContas() {
         return Conta.contador;
     }
@@ -95,13 +108,14 @@ public class Conta {
     public boolean isAtiva() {
         return ativa;
     }
+
     public String getTipo() {
         return tipo;
     }
 
     @Override
     public String toString() {
-        return  this.cliente + "\n" +
+        return this.cliente + "\n" +
                 "AG: " + this.agencia + "\n" +
                 "CC: " + this.numero + "\n" +
                 "Data de abertura: " + this.dataDeAbertura.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
